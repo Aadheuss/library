@@ -354,6 +354,7 @@ template {
   --grey: #6B7280;
   --light-grey: #A3A3A3;
   --accent-color: #0EA5E9;
+  --emerald: #10B981;
 }
 
 body {
@@ -381,7 +382,9 @@ h1 {
 .book {
   font-family: 'Raleway', sans-serif;
   display: grid;
+  position: relative;
   grid-auto-flow: row;
+  align-content: start;
   border: groove 2px var(--dark-color);
   border-right-color: var(--accent-color);
   border-radius: 8px;
@@ -391,41 +394,6 @@ h1 {
   font-weight: 500;
 }
 
-.book :last-child {
-  color: var(--grey);
-  justify-self: end;
-  align-self: end;
-}
-
-.add::after,
-#book-form::before {
-  content: "";
-  background-image: url(../img/plus.svg);
-  background-repeat: none;
-  position: absolute;
-}
-
-#book-form::before {
-  background-size: 30px 30px;
-  top: 1rem;
-  right: 1rem;
-  width: 30px;
-  height: 30px;
-  transform: rotate(45deg);
-}
-
-.add::after {
-  background-size: 75px 75px;
-  right: 3rem;
-  bottom: 1.5rem;
-  width: 75px;
-  height: 75px;
-}
-
-button {
-  cursor: pointer;
-}
-
 /*new book form pop-up start*/
 #book-form {
   display: flex;
@@ -433,8 +401,11 @@ button {
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  background-color: #38BDF8;
-  position: absolute;
+  border: var(--dark-color) 2px solid;
+  border-right-color: var(--accent-color);
+  border-bottom-color: var(--emerald);
+  background-color: var(--light-color);
+  position: fixed;
   padding: 3rem 2rem;
   width: 500px;
   height: fit-content;
@@ -455,7 +426,9 @@ button {
   height: 1.25rem;
   border-radius: 16px;
   width: 300px;
-  border: none;
+  border: solid 1px var(--dark-color);
+  border-top-color: var(--emerald);
+  border-left-color: var(--accent-color);
 }
 
 #book-form > div > label {
@@ -486,7 +459,7 @@ button {
   padding: 0;
 }
 
-#book-form button:not([type="button"]) {
+#book-form button:last-child {
   color: var(--light-color);
   font-weight: 500;
   border: none;
@@ -495,7 +468,7 @@ button {
   padding: 0.5rem 1rem;
 }
 
-#book-form button[type="button"] {
+#book-form button:first-child {
   position: absolute;
   right: 1rem;
   top: 1rem;
@@ -504,13 +477,104 @@ button {
   opacity: 0;
 }
 
+#hidden,
 .hidden {
   display: none;
 }
 
-#hidden {
-  display: none;
+.check {
+  border-right-color: var(--emerald);
 }
+
+.book > div:last-child {
+  position: absolute;
+  right: 0;
+  bottom: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  padding: 0.25rem 1rem;
+  background-color: var(--accent-color);
+  color: #F5F5F4;
+}
+
+
+.check > div:last-child {
+  background-color: var(--emerald);
+}
+
+.book > div:first-of-type {
+  border-bottom: solid 2px var(--accent-color);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.book > div:not(:first-of-type):not(:last-child) {
+  font-size: 1rem;
+}
+
+.check div:first-of-type {
+  border-bottom-color: var(--emerald);
+}
+
+button,
+.book > div:last-child {
+  cursor: pointer;
+}
+/*Pseudo Elements and its elements*/
+.add::after,
+#book-form::before,
+.book::before {
+  content: "";
+  background-image: url(../img/plus.svg);
+  background-repeat: none;
+  position: absolute;
+}
+
+.add,
+.add::after {
+  position: fixed;
+  right: 3rem;
+  bottom: 1.5rem;
+  width: 75px;
+  height: 75px;
+}
+
+.add::after {
+  background-size: 75px 75px;
+  background-color: var(--light-color);
+  border: none;
+}
+
+#book-form::before {
+  background-size: 30px 30px;
+  top: 1rem;
+  right: 1rem;
+  width: 30px;
+  height: 30px;
+}
+
+.book > button {
+  position: absolute;
+  opacity: 0;
+}
+
+.book > button,
+.book::before {
+  right: 0.5rem;
+  top: 0.5rem;
+  width: 25px;
+  height: 25px;
+}
+
+.book::before {
+  background-size: 25px 25px;
+}
+
+#book-form::before,
+.book::before {
+  transform: rotate(45deg);
+}
+
 
 
 
