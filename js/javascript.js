@@ -74,10 +74,14 @@ checkCurrent();
 
 function toggleMark() {
   this.parentElement.classList.toggle('check');
+  const index = Number(this.parentElement.getAttribute('data-book'));
+
   if (this.textContent === 'read') {
     this.textContent = 'not read';
+    myLibrary[index].mark = 'not read';
   } else {
     this.textContent ='read';
+    myLibrary[index].mark = 'read'
   }
 }
 
