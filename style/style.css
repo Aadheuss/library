@@ -396,6 +396,45 @@ h1 {
 }
 
 /*new book form pop-up start*/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+input[type="radio"] {
+  display: grid;
+  place-content: center;
+  appearance: none;
+  background-color: var(--light-color);
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 0.8em;
+  height: 0.8em;
+  border: 1px solid var(--dark-color);
+  border-radius: 50%;
+}
+
+input[type="radio"]::before {
+  content: "";
+  width: 0.4em;
+  height: 0.4em;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--emerald);
+  background-color: CanvasText;
+}
+
+div:last-child > [type="radio"]::before {
+  box-shadow: inset 1em 1em var(--accent-color)
+}
+
+input[type="radio"]:checked:before {
+  transform: scale(1);
+}
+
 #book-form,
 .warning {
   display: flex;
@@ -416,6 +455,7 @@ h1 {
   right: 0;
   top: 0;
   bottom: 0;
+  z-index: 2;
 }
 
 #book-form label {
@@ -424,7 +464,7 @@ h1 {
 }
 
 #book-form > div > input {
-  padding: 0.25rem 0.5rem;
+  padding: 0.75rem;
   height: 1.25rem;
   border-radius: 16px;
   width: min(300px, 64vw);
@@ -459,6 +499,11 @@ h1 {
   font-size: 1.25rem;
   border: none;
   padding: 0;
+}
+
+#book-form fieldset > div {
+  display: flex;
+  justify-content: center;
 }
 
 #book-form button:last-child {
@@ -520,8 +565,20 @@ button,
   width: 250px;
   font-weight: 500;
   font-size: 1.05rem;
-  border-top-color: red;
-  border-left-color: red;
+  border-color: var(--dark-color);
+  border-left-color: var(--emerald);
+  border-top-color: var(--accent-color);
+  z-index: 4;
+}
+
+.overlay {
+  background-color: var(--dark-color);
+  opacity: 0.3;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  z-index: 1;
 }
 
 /*Pseudo Elements and its elements*/

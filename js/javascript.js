@@ -112,6 +112,7 @@ function deleteBook () {
 
 function closeWarning () {
   this.parentElement.classList.remove('warning');
+  removeOverlay();
 }
 
 const bookFormInput = document.querySelectorAll('form > div > input');
@@ -130,6 +131,7 @@ const bookForm = document.querySelector('.add');
 bookForm.addEventListener('click', openForm);
 
 function openForm () {
+  addOverlay();
   popUp.id = 'book-form';
   bookFormInput.forEach(input => refreshValue(input));
 }
@@ -147,9 +149,32 @@ function submitBook () {
     hideElement();
     checkCurrent();
   } else {
+    addOverlay();
     const warningPopUp = document.querySelector('.hidden');
     warningPopUp.classList.add('warning');
     checkCurrent();
+  }
+}
+
+function addOverlay () {
+  const body = document.querySelector('body');
+  const checkOverlay = document.querySelector('.overlay');
+  if (checkOverlay === null) {
+  const overlay = document.createElement('div');
+  overlay.classList.add('overlay');
+  body.appendChild(overlay);
+  } else {
+    checkOverlay.style['z-index'] ='3';
+  }
+}
+
+function removeOverlay () {
+  const overlay = document.querySelector('.overlay');
+  const zIndex = Number(overlay.style['z-index']);
+  if (overlay !== null && zIndex !== 3) {
+    overlay.remove();
+  } else {
+    overlay.style['z-index'] = 1;
   }
 }
 
@@ -169,5 +194,6 @@ function hideElement () {
   const closeButton = document.querySelector('.warning button');
   if (closeButton === null) {
     popUp.id = 'hidden';
+    removeOverlay();
   }
 }
