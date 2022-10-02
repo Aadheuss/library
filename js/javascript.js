@@ -61,8 +61,13 @@ container.addEventListener('click', checkCurrent);
 function checkCurrent() {
   const markButton = document.querySelectorAll('.book > div:last-child');
   const removeButton = document.querySelectorAll('.book > button');
+  const closeButton = document.querySelector('.warning button');
   markButton.forEach(button => button.addEventListener('click', toggleMark));
   removeButton.forEach(button => button.addEventListener('click', deleteBook));
+
+  if (closeButton !== null) {
+  closeButton.addEventListener('click', closeWarning);
+  }
 }
 
 checkCurrent();
@@ -101,6 +106,10 @@ function deleteBook () {
   this.parentElement.remove();
 }
 
+function closeWarning () {
+  this.parentElement.classList.remove('warning');
+}
+
 const bookFormInput = document.querySelectorAll('form > div > input');
 bookFormInput.forEach(input => input.addEventListener('input', hideLabel));
 
@@ -133,6 +142,10 @@ function submitBook () {
     addBookToLibrary();
     hideElement();
     checkCurrent();
+  } else {
+    const warningPopUp = document.querySelector('.hidden');
+    warningPopUp.classList.add('warning');
+    checkCurrent();
   }
 }
 
@@ -149,5 +162,8 @@ const closeButton = document.querySelector('.close');
 closeButton.addEventListener('click', hideElement);
 
 function hideElement () {
-  popUp.id = 'hidden';
+  const closeButton = document.querySelector('.warning button');
+  if (closeButton === null) {
+    popUp.id = 'hidden';
+  }
 }

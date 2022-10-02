@@ -360,7 +360,7 @@ template {
 body {
   background-color: var(--light-color);
   font-family: 'Montserrat', sans-serif;
-  color: var(--dark-color)
+  color: var(--dark-color);
 }
 
 h1 {
@@ -377,6 +377,7 @@ h1 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
+  padding-bottom: 6rem;
 }
 
 .book {
@@ -395,7 +396,8 @@ h1 {
 }
 
 /*new book form pop-up start*/
-#book-form {
+#book-form,
+.warning {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -407,7 +409,7 @@ h1 {
   background-color: var(--light-color);
   position: fixed;
   padding: 3rem 2rem;
-  width: 500px;
+  width: min(500px, 80vw);
   height: fit-content;
   margin: auto;
   left: 0;
@@ -425,7 +427,7 @@ h1 {
   padding: 0.25rem 0.5rem;
   height: 1.25rem;
   border-radius: 16px;
-  width: 300px;
+  width: min(300px, 64vw);
   border: solid 1px var(--dark-color);
   border-top-color: var(--emerald);
   border-left-color: var(--accent-color);
@@ -466,15 +468,6 @@ h1 {
   background-color: var(--dark-color);
   border-radius: 4px;
   padding: 0.5rem 1rem;
-}
-
-#book-form button:first-child {
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
-  width: 30px;
-  height: 30px;
-  opacity: 0;
 }
 
 #hidden,
@@ -520,14 +513,30 @@ button,
 .book > div:last-child {
   cursor: pointer;
 }
+
+.warning {
+  display: flex;
+  padding: 2rem 1rem;
+  width: 250px;
+  font-weight: 500;
+  font-size: 1.05rem;
+  border-top-color: red;
+  border-left-color: red;
+}
+
 /*Pseudo Elements and its elements*/
 .add::after,
 #book-form::before,
-.book::before {
+.book::before,
+.warning::before {
   content: "";
   background-image: url(../img/plus.svg);
   background-repeat: none;
   position: absolute;
+}
+
+#book-form > button:first-child {
+  margin: 0;
 }
 
 .add,
@@ -537,29 +546,40 @@ button,
   bottom: 1.5rem;
   width: 75px;
   height: 75px;
+  border: none;
+}
+
+.add {
+  background-color: #f5f5f400;
 }
 
 .add::after {
   background-size: 75px 75px;
-  background-color: var(--light-color);
-  border: none;
 }
 
-#book-form::before {
-  background-size: 30px 30px;
+#book-form::before,
+#book-form > button:first-child {
   top: 1rem;
   right: 1rem;
   width: 30px;
   height: 30px;
 }
 
-.book > button {
+#book-form::before {
+  background-size: 30px 30px;
+}
+
+.book > button,
+.warning button,
+#book-form > button:first-child {
   position: absolute;
   opacity: 0;
 }
 
 .book > button,
-.book::before {
+.book::before,
+.warning::before,
+.warning button {
   right: 0.5rem;
   top: 0.5rem;
   width: 25px;
@@ -571,8 +591,25 @@ button,
 }
 
 #book-form::before,
-.book::before {
+.book::before,
+.warning::before {
   transform: rotate(45deg);
+}
+
+@media screen and (max-width: 480px) {
+  #book-form {
+  padding: 3rem 1.5rem;
+}
+
+ h1 {
+  font-size: 2rem;
+ }
+
+ #book-form::before, 
+ #book-form > button:first-child {
+  top: 0.5rem;
+  right: 0.5rem;
+}
 }
 
 
