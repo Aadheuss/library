@@ -448,7 +448,7 @@ input[type="radio"]:checked:before {
   background-color: var(--light-color);
   position: fixed;
   padding: 3rem 2rem;
-  width: min(500px, 80vw);
+  width: min(500px, 90vw);
   height: fit-content;
   margin: auto;
   left: 0;
@@ -467,7 +467,7 @@ input[type="radio"]:checked:before {
   padding: 0.75rem;
   height: 1.25rem;
   border-radius: 16px;
-  width: min(300px, 64vw);
+  width: min(300px, 72vw);
   border: solid 1px var(--dark-color);
   border-top-color: var(--emerald);
   border-left-color: var(--accent-color);
@@ -504,6 +504,8 @@ input[type="radio"]:checked:before {
 #book-form fieldset > div {
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 #book-form button:last-child {
