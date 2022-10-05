@@ -150,7 +150,7 @@ function submitBook () {
     checkCurrent();
   } else {
     addOverlay();
-    const warningPopUp = document.querySelector('.hidden');
+    const warningPopUp = document.querySelector('form + .hidden');
     warningPopUp.classList.add('warning');
     checkCurrent();
   }
