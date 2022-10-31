@@ -5,11 +5,13 @@ const popUp = document.querySelector('form');
 const container = document.querySelector('div')
 let myLibrary = [];
 
-function Book(title, author, pages, mark) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.mark = mark;
+class Book {
+  constructor(title, author, pages, mark) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.mark = mark;
+  }
 }
 
 const bookOne = new Book('Eloquent Javascript', 'Marijn Haverbeke', 274, 'not read')
