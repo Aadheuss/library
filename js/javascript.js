@@ -2,9 +2,11 @@ const title = document.querySelector('.title input');
 const author = document.querySelector('.author input');
 const pages = document.querySelector('.pages input');
 const popUp = document.querySelector('form');
-const container = document.querySelector('div')
+const container = document.querySelector('.container');
+
 let myLibrary = [];
 
+//Object book constructor 
 class Book {
   constructor(title, author, pages, mark) {
     this.title = title;
@@ -14,6 +16,7 @@ class Book {
   }
 }
 
+//Create instances of Book and add to an Array
 const bookOne = new Book('Eloquent Javascript', 'Marijn Haverbeke', 274, 'not read')
 const bookTwo = new Book('Naruto Vol. 72', 'Masashi Kishimoto', 208, 'read')
 myLibrary.push(bookOne);
@@ -23,18 +26,19 @@ function addBookToLibrary() {
   myLibrary.forEach(book => addBook(book));
 }
 
+//Create html elements for each book
 function addBook(obj) {
   const bookNumber = myLibrary.indexOf(obj);
-  const book = document.querySelector(`[data-book='${bookNumber}']`)
-
+  const book = document.querySelector(`[data-index='${bookNumber}']`);
+//if the book index doesn't exist add book html elements and use the book array index for the data-index attribute
   if (book === null) {
     const book = document.createElement('div');
     book.classList.add('book');
-    book.setAttribute('data-book', `${bookNumber}`)
+    book.setAttribute('data-index', `${bookNumber}`)
     container.appendChild(book);
 
-    const removeBook = document.createElement('button');
-    book.appendChild(removeBook);
+    const dltBookBtn = document.createElement('button');
+    book.appendChild(dltBookBtn);
 
     const bookTitle = document.createElement('div');
     bookTitle.textContent = `${obj.title}`;
