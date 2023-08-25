@@ -160,18 +160,18 @@ submitButton.addEventListener('click', submitBook);
 //Submit book created by user into the DOM and put the object into myLibrary array
 function submitBook (event) {
   //Prevent the form from submitting and refreshing the window
-  event.preventDefault();
   const mark = document.querySelector('.mark input:checked');
   currentMark = mark.value==='true'?true:false;
   const number = new RegExp('^[0-9]+$');
 
   if (title.value.length > 0 && author.value.length > 0 && number.test(pages.value)) {
+    event.preventDefault();
     const book = new Book(title.value, author.value, pages.value, currentMark);
     myLibrary.push(book);
     addBookToLibrary();
     //Close the dialog 
     bookModalForm.close();
   } 
-
+  
   checkCurrent();
 }
