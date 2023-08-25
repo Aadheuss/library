@@ -16,9 +16,29 @@ class Book {
   }
 }
 
+//Create a function to toggle Book.mark
+Book.prototype.toggle = function () {
+  this.mark = this.mark?false:true;
+}
+
+//Toggle Book.mark info
+function toggleMark() {
+  this.parentElement.classList.toggle('check');
+  const index = Number(this.parentElement.getAttribute('data-index'));
+  const currentBook = myLibrary[index];
+
+  if (this.textContent === 'read') {
+    this.textContent = 'not read';
+  } else {
+    this.textContent ='read';
+  }
+  
+  currentBook.toggle();
+}
+
 //Create instances of Book and add to an Array
-const bookOne = new Book('Eloquent Javascript', 'Marijn Haverbeke', 274, 'not read')
-const bookTwo = new Book('Naruto Vol. 72', 'Masashi Kishimoto', 208, 'read')
+const bookOne = new Book('Eloquent Javascript', 'Marijn Haverbeke', 274, false)
+const bookTwo = new Book('Naruto Vol. 72', 'Masashi Kishimoto', 208, true)
 myLibrary.push(bookOne);
 myLibrary.push(bookTwo);
 
@@ -51,9 +71,9 @@ function addBook(obj) {
     const bookPages = document.createElement('div');
     bookPages.textContent = `pages : ${obj.pages}.`;
     book.appendChild(bookPages);
-
+    //Create info for book to show if the book has been read or not
     const bookMark = document.createElement('div');
-    bookMark.textContent = obj.mark;
+    bookMark.textContent = obj.mark?'read':'not read';
     book.appendChild(bookMark);
 
     checkMark(bookMark);
@@ -78,19 +98,7 @@ function checkCurrent() {
 
 checkCurrent();
 
-function toggleMark() {
-  this.parentElement.classList.toggle('check');
-  const index = Number(this.parentElement.getAttribute('data-book'));
-
-  if (this.textContent === 'read') {
-    this.textContent = 'not read';
-    myLibrary[index].mark = 'not read';
-  } else {
-    this.textContent ='read';
-    myLibrary[index].mark = 'read'
-  }
-}
-
+//Toggle bookMark info
 function checkMark (bookMark) {
   if (bookMark.textContent === 'read') {
     bookMark.parentElement.classList.add('check');
@@ -100,15 +108,15 @@ function checkMark (bookMark) {
 }
 
 function deleteBook () {
-  const index = Number(this.parentElement.getAttribute('data-book'));
-  const books = document.querySelectorAll(`[data-book]`);
+  const index = Number(this.parentElement.getAttribute('data-index'));
+  const books = document.querySelectorAll(`[data-index]`);
   books.forEach(book => changeData(book));
 
   function changeData (book) {
-    const secondIndex = Number(book.getAttribute('data-book'));
+    const secondIndex = Number(book.getAttribute('data-index'));
     if (secondIndex > index) {
       const index = secondIndex - 1;
-      book.setAttribute('data-book', index);
+      book.setAttribute('data-index', index);
     }
   }
 
