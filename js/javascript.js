@@ -153,11 +153,14 @@ function openForm () {
 const submitButton = document.querySelector('form button:last-child');
 submitButton.addEventListener('click', submitBook);
 
+//Submit book created by user into the DOM and put the object into myLibrary array
 function submitBook () {
   const mark = document.querySelector('.mark input:checked');
+  currentMark = mark.value==='true'?true:false;
   const number = new RegExp('^[0-9]+$');
+
   if (title.value.length > 0 && author.value.length > 0 && number.test(pages.value)) {
-    const book = new Book(title.value, author.value, pages.value, mark.value);
+    const book = new Book(title.value, author.value, pages.value, currentMark);
     myLibrary.push(book);
     addBookToLibrary();
     hideElement();
