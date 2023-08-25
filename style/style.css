@@ -366,6 +366,7 @@ body {
 }
 
 h1 {
+  box-shadow: 10px 5px var(--emerald);
   color: var(--light-color);
   background-color: var(--dark-color);
   font-weight: 400;
@@ -390,6 +391,7 @@ h1 {
   align-content: start;
   border: groove 2px var(--dark-color);
   border-right-color: var(--accent-color);
+  border-left: 5px solid var(--dark-color);
   border-radius: 8px;
   height: 250px;
   padding: 1rem;
@@ -465,6 +467,7 @@ input:invalid:not(:placeholder-shown):not(:focus-visible) + span::before {
 }
 
 #book-form {
+  box-shadow: 10px 10px var(--dark-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -563,6 +566,11 @@ input:invalid:not(:placeholder-shown):not(:focus-visible) + span::before {
   padding: 0.25rem 1rem;
   background-color: var(--accent-color);
   color: #F5F5F4;
+}
+
+.book > div:not(:first-of-type):not(:last-of-type) {
+  padding: 0.25rem 0;
+  border-bottom: dotted 1px grey;
 }
 
 
