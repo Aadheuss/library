@@ -517,7 +517,6 @@ input[type="radio"]:checked:before {
   padding: 0.5rem 1rem;
 }
 
-#hidden,
 .hidden {
   display: none;
 }

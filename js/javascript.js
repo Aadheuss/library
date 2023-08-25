@@ -85,15 +85,13 @@ addBookToLibrary();
 container.addEventListener('click', checkCurrent);
 
 function checkCurrent() {
+  //Add event listener to toggle the book mark info
   const markButton = document.querySelectorAll('.book > div:last-child');
-  const removeButton = document.querySelectorAll('.book > button');
-  const closeButton = document.querySelector('.warning button');
   markButton.forEach(button => button.addEventListener('click', toggleMark));
-  removeButton.forEach(button => button.addEventListener('click', deleteBook));
 
-  if (closeButton !== null) {
-  closeButton.addEventListener('click', closeWarning);
-  }
+  //Add event listener to delete the book
+  const removeButton = document.querySelectorAll('.book > button');
+  removeButton.forEach(button => button.addEventListener('click', deleteBook));
 }
 
 checkCurrent();
@@ -124,16 +122,13 @@ function deleteBook () {
   this.parentElement.remove();
 }
 
-function closeWarning () {
-  this.parentElement.classList.remove('warning');
-  removeOverlay();
-}
-
+//Hide label on all input elements
 const bookFormInput = document.querySelectorAll('form > div > input');
 bookFormInput.forEach(input => input.addEventListener('input', hideLabel));
 
 function hideLabel() {
   const label = this.previousElementSibling;
+
   if (this.value.length >= 1) {
    label.classList.add('hidden');
   } else {
@@ -141,20 +136,31 @@ function hideLabel() {
   }
 }
 
-const bookForm = document.querySelector('.add');
-bookForm.addEventListener('click', openForm);
-
-function openForm () {
-  addOverlay();
-  popUp.id = 'book-form';
-  bookFormInput.forEach(input => refreshValue(input));
+function refreshValue(input) {
+  if (input.value.length > 0) {
+    input.value = "";
+    //Show the label
+    input.previousElementSibling.classList.remove('hidden');
+  }
 }
+
+//Use dialog html element for modal
+const bookModalForm = document.querySelector('dialog.form-container');
+const bookFormShowBtn = document.querySelector('.add');
+
+//Show the book dialog opens the <dialog> modally and refresh all the inputs value
+bookFormShowBtn.addEventListener('click', () => {
+  bookModalForm.showModal();
+  bookFormInput.forEach(input => refreshValue(input));
+})
 
 const submitButton = document.querySelector('form button:last-child');
 submitButton.addEventListener('click', submitBook);
 
 //Submit book created by user into the DOM and put the object into myLibrary array
-function submitBook () {
+function submitBook (event) {
+  //Prevent the form from submitting and refreshing the window
+  event.preventDefault();
   const mark = document.querySelector('.mark input:checked');
   currentMark = mark.value==='true'?true:false;
   const number = new RegExp('^[0-9]+$');
@@ -163,54 +169,9 @@ function submitBook () {
     const book = new Book(title.value, author.value, pages.value, currentMark);
     myLibrary.push(book);
     addBookToLibrary();
-    hideElement();
-    checkCurrent();
-  } else {
-    addOverlay();
-    const warningPopUp = document.querySelector('form + .hidden');
-    warningPopUp.classList.add('warning');
-    checkCurrent();
-  }
-}
+    //Close the dialog 
+    bookModalForm.close();
+  } 
 
-function addOverlay () {
-  const body = document.querySelector('body');
-  const checkOverlay = document.querySelector('.overlay');
-  if (checkOverlay === null) {
-  const overlay = document.createElement('div');
-  overlay.classList.add('overlay');
-  body.appendChild(overlay);
-  } else {
-    checkOverlay.style['z-index'] ='3';
-  }
-}
-
-function removeOverlay () {
-  const overlay = document.querySelector('.overlay');
-  const zIndex = Number(overlay.style['z-index']);
-  if (overlay !== null && zIndex !== 3) {
-    overlay.remove();
-  } else {
-    overlay.style['z-index'] = 1;
-  }
-}
-
-bookFormInput.forEach(input => refreshValue(input));
-
-function refreshValue(input) {
-  if (input.value.length > 0) {
-    input.value = "";
-    input.previousElementSibling.classList.remove('hidden');
-  }
-}
-
-const closeButton = document.querySelector('.close');
-closeButton.addEventListener('click', hideElement);
-
-function hideElement () {
-  const closeButton = document.querySelector('.warning button');
-  if (closeButton === null) {
-    popUp.id = 'hidden';
-    removeOverlay();
-  }
+  checkCurrent();
 }
