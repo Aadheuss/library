@@ -23,7 +23,7 @@ Book.prototype.toggle = function () {
 
 //Toggle Book.mark info
 function toggleMark() {
-  this.parentElement.classList.toggle('check');
+  this.parentElement.classList.toggle('read');
   const index = Number(this.parentElement.getAttribute('data-index'));
   const currentBook = myLibrary[index];
 
@@ -76,7 +76,7 @@ function addBook(obj) {
     bookMark.textContent = obj.mark?'read':'not read';
     book.appendChild(bookMark);
 
-    checkMark(bookMark);
+    addReadClass(bookMark);
   }
 }
 
@@ -98,12 +98,12 @@ function checkCurrent() {
 
 checkCurrent();
 
-//Toggle bookMark info
-function checkMark (bookMark) {
+//Add class to style book
+function addReadClass (bookMark) {
   if (bookMark.textContent === 'read') {
-    bookMark.parentElement.classList.add('check');
+    bookMark.parentElement.classList.add('read');
   } else {
-    bookMark.parentElement.classList.remove('check');
+    bookMark.parentElement.classList.remove('read');
   }
 }
 

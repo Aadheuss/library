@@ -522,7 +522,7 @@ input[type="radio"]:checked:before {
   display: none;
 }
 
-.check {
+.read {
   border-right-color: var(--emerald);
 }
 
@@ -538,7 +538,7 @@ input[type="radio"]:checked:before {
 }
 
 
-.check > div:last-child {
+.read > div:last-child {
   background-color: var(--emerald);
 }
 
@@ -552,7 +552,7 @@ input[type="radio"]:checked:before {
   font-size: 1rem;
 }
 
-.check div:first-of-type {
+.read div:first-of-type {
   border-bottom-color: var(--emerald);
 }
 
