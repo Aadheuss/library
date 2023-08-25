@@ -607,6 +607,10 @@ button,
   border: none;
 }
 
+.add:focus-visible {
+  outline: none;
+}
+
 .add {
   background-color: #f5f5f400;
 }
