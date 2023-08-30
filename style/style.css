@@ -506,7 +506,7 @@ input:invalid:not(:placeholder-shown):not(:focus-visible) + span::before {
 }
 
 #book-form > div > label {
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   left: 1rem;
   color: var(--grey);
